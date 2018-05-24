@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+	    xmlns:tx="http://www.springframework.org/schema/tx" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+					http://www.springframework.org/schema/context 
+					http://www.springframework.org/schema/context/spring-context-3.2.xsd
+					http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+          			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+
+	<!-- 配置SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+	</bean>
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+    <!-- 
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="query*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+     -->
+     <!-- <bean id="before" class="proxy.EnsureUserSession"></bean>
+     <aop:config>						 	
+		<aop:pointcut id="isuser" expression="execution(* *..BookAction.*(..)) or execution(* *..OrderAction.*(..)) " />
+		<aop:advisor pointcut-ref="isuser" advice-ref="before" />
+	</aop:config> -->
+     
+	<!-- 创建并装配数据访问层操作对象 -->
+	<bean id="UserDao" class="dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="BookDao" class="dao.impl.BookDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="OrderDao" class="dao.impl.OrderDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 创建并装配业务逻辑层操作对象 -->
+	<bean id="UserService" class="service.impl.UserServiceImpl">
+		<property name="userdao">
+			<ref local="UserDao" />
+		</property>
+	</bean>	
+	<bean id="BookService" class="service.impl.BookServiceImpl">
+		<property name="bookdao">
+			<ref local="BookDao" />
+		</property>
+	</bean>	
+	<bean id="OrderService" class="service.impl.OrderServiceImpl">
+		<property name="orderdao">
+			<ref local="OrderDao" />
+		</property>
+	</bean>	
+	<!-- 将业务逻辑层注入action -->
+	<bean id="UserAction" class="action.UserAction" scope="prototype">
+		<property name="userservice">
+			<ref local="UserService"/>
+		</property>
+	</bean>
+	<bean id="BookAction" class="action.BookAction" scope="prototype">
+		<property name="bookservice">
+			<ref local="BookService"/>
+		</property>
+	</bean>
+	<bean id="OrderAction" class="action.OrderAction" scope="prototype">
+		<property name="orderservice">
+			<ref local="OrderService"/>
+		</property>
+	</bean>
+	<bean id="JspAction" class="action.JspAction" scope="prototype">
+	</bean>
+
+</beans>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"/>
+	<constant name="struts.action.excludePattern" value="/plugins/.*?" />
+	<constant name="struts.objectFactory" value="spring"/> 
+	<package name="JspPage" extends="struts-default">
+		<action name="hello" class="JspAction" method="hello">
+			<result name="hello">/jsp/hello.jsp</result>
+		</action>
+		<action name="login" class="JspAction" method="login">
+			<result name="login">/jsp/user/login.jsp</result>
+		</action>
+		<action name="regist" class="JspAction" method="regist">
+			<result name="regist">/jsp/user/regist.jsp</result>
+		</action>
+		<action name="mymes" class="JspAction" method="mymes">
+			<result name="mymes">/jsp/user/usermes.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="addbook" class="JspAction" method="addbook">
+			<result name="addbook">/jsp/book/addbook.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="updatemes" class="JspAction" method="updatemes">
+			<result name="updatemes">/jsp/user/updatemes.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="updatepsw" class="JspAction" method="updatepsw">
+			<result name="updatepsw">/jsp/user/updatepsw.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+	</package>
+	
+	<package name="User" extends="struts-default">
+		<action name="loginsuccess" class="UserAction" method="login">
+			<result name="success">/jsp/user/loginsuccess.jsp</result>
+			<result name="input">/jsp/user/loginfailed.jsp</result>
+		</action>
+		<action name="registsuccess" class="UserAction" method="regist">
+			<result name="success">/jsp/user/registsuccess.jsp</result>
+			<result name="input">/jsp/user/registfailed.jsp</result>
+		</action>
+		<action name="updatemessuccess" class="UserAction" method="updatemes">
+			<result name="success">/jsp/user/updatemessuccess.jsp</result>
+			<result name="input">/jsp/user/updatemesfailed.jsp</result>
+		</action>
+		<action name="updatepswsuccess" class="UserAction" method="updatepsw">
+			<result name="success">/jsp/user/updatepswsuccess.jsp</result>
+			<result name="input">/jsp/user/updatepswfailed.jsp</result>
+		</action>
+		<action name="otherusermes" class="UserAction" method="otherusermes">
+			<result name="success">/jsp/user/otherusermes.jsp</result>
+		</action>
+	</package>
+	
+	<package name="Book" extends="struts-default">
+		<action name="index" class="BookAction" method="index">
+			<result name="index">/jsp/index.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="addbooksuccess" class="BookAction" method="addbook">
+			<result name="success" type="redirect">/jsp/book/addsuccess.jsp</result>
+			<result name="input">/jsp/book/addfailed.jsp</result>
+		</action>
+		<action name="mybooks" class="BookAction" method="mybooks">
+			<result name="mybooks">/jsp/book/mybooks.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="deletemybook" class="BookAction" method="deletemybook">
+			<result name="success">/jsp/book/deletesuccess.jsp</result>
+			<result name="input">/jsp/book/deletebookfailed.jsp</result>
+		</action>
+		<action name="updatemybook" class="BookAction" method="updatemybook">
+			<result name="success">/jsp/book/updatebookmes.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="updatebooksuccess" class="BookAction" method="updatebooksuccess">
+			<result name="success">/jsp/book/updatesuccess.jsp</result>
+			<result name="input">/jsp/book/updatefailed.jsp</result>
+		</action>
+	</package>
+	
+	<package name="Order"  extends="struts-default" >
+		<action name="addorder" class="OrderAction" method="addorder">
+			<result name="success">/jsp/order/addordersuccess.jsp</result>
+		</action>
+		<action name="myorder" class="OrderAction" method="myorder">
+			<result name="myorder">/jsp/order/myorder.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="oldorder" class="OrderAction" method="oldorder">
+			<result name="oldorder">/jsp/order/myoldorder.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="mysale" class="OrderAction" method="mysale">
+			<result name="mysale">/jsp/order/mysale.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="myoldsale" class="OrderAction" method="myoldsale">
+			<result name="myoldsale">/jsp/order/myoldsale.jsp</result>
+			<result name="failed">/jsp/error.jsp</result>
+		</action>
+		<action name="overorder" class="OrderAction" method="overorder">
+			<result name="success">/jsp/order/oversuccess.jsp</result>
+			<result name="input">/jsp/order/overfailed.jsp</result>
+		</action>
+		<action name="cancelorder" class="OrderAction" method="cancelorder">
+			<result name="success">/jsp/order/cancelsuccess.jsp</result>
+		</action>
+		<action name="payorder" class="OrderAction" method="payorder">
+			<result name="success">/jsp/order/paysuccess.jsp</result>
+		</action>
+	</package>
+	
+</struts>

@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+@import url('../bootstrap/css/bootstrap.min.css');
+.head{
+	margin:0 auto;
+	height:5%;
+	padding:5px;
+	width:100%;
+	background-color: black;
+	color: white;
+	font-size:25px;
+}
+a:link {color: #FFFFFF; text-decoration:none;}
+a:visited {color: #FFFFFF;text-decoration:none;}
+a:hover {color: gray; text-decoration:none;}
+a:active {color: #FFFFFF;}
+.content{
+	height:1000px;
+	width:100%;
+	
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size:auto;
+}
+.mymes{
+	font-size:25px;
+}
+.updatemes{
+	font-size:15px;
+}
+.myButton {
+	-moz-box-shadow: 8px;
+	-webkit-box-shadow: 8px;
+	background-color:transparent;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:black;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+}
+.myButton:hover {
+	background-color:#59f;
+	color:white;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+.bottom{
+	margin:0 auto;
+	width:100%;
+	text-align:center; 
+	bottom:0; 
+	position:fixed; 
+	
+}
